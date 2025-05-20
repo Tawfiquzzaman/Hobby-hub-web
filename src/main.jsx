@@ -10,6 +10,7 @@ import {
 import Root from './pages/Root/Root.jsx';
 import ErrorPage from './pages/Error/ErrorPage.jsx';
 import Home from './pages/Home/Home.jsx';
+import AddHobbyGroup from './pages/AddHobbyGroup/AddHobbyGroup.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         path:'/',
         Component: Home,
 
+      },
+      {
+        path: 'addHobbyGroup',
+        Component: AddHobbyGroup,
       }
     ]
 

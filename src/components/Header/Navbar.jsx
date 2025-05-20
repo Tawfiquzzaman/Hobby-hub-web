@@ -5,10 +5,13 @@ const Navbar = () => {
   const links = (
     <>
       <Link>
-        <li>Home</li>
+        <li to="/">Home</li>
       </Link>
       <Link>
         <li>All Groups</li>
+      </Link>
+      <Link to="/addHobbyGroup">
+        <li>Add Hobby Group</li>
       </Link>
       <Link>
         <li>About</li>
@@ -18,13 +21,13 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar bg-[#521C0D] shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-5 w-5 text-white"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -45,13 +48,16 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <div className="flex">
+            <img className="w-10" src="hobby.png" alt="" />
+            <Link to='/'><a className="btn btn-ghost text-xl text-white">HobbyHub</a></Link>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          <Link to=''><a className="btn btn-warning rounded-full bg-">Login</a></Link>
         </div>
       </div>
     </div>
