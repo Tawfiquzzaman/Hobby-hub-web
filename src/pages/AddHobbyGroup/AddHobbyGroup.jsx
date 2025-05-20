@@ -7,27 +7,27 @@ const AddHobbyGroup = () => {
     const form = e.target;
     const formData = new FormData(form);
     console.log(formData.entries());
-    const newCoffee = Object.fromEntries(formData.entries());
-    console.log(newCoffee);
+    const newGroup = Object.fromEntries(formData.entries());
+    console.log(newGroup);
 
-    // fetch("http://localhost:3000/coffees", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(newCoffee),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.insertedId) {
-    //       console.log("Added Successfully");
-    //       Swal.fire({
-    //         title: "Coffee Added Successfully To Taste",
-    //         icon: "success",
-    //         draggable: true,
-    //       });
-    //     }
-    //   });
+    fetch("http://localhost:3000/createGroups", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newGroup),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          console.log("Added Successfully");
+          Swal.fire({
+            title: "Group Created Successfully",
+            icon: "success",
+            draggable: true,
+          });
+        }
+      });
   };
   return (
     <div className="p-24 ">
