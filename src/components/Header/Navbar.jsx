@@ -4,25 +4,27 @@ import { Link } from "react-router";
 const Navbar = () => {
   const links = (
     <>
-      <Link>
-        <li to="/">Home</li>
+      <div className="flex gap-10">
+        <Link>
+        <li className="text-[#F2E2B1] font-bold" to="/">Home</li>
       </Link>
       <Link>
-        <li>All Groups</li>
+        <li className="text-[#F2E2B1] font-bold">All Groups</li>
       </Link>
       <Link to="/addHobbyGroup">
-        <li>Add Hobby Group</li>
+        <li className="text-[#F2E2B1] font-bold">Add Hobby Group</li>
       </Link>
       <Link>
-        <li>About</li>
+        <li className="text-[#F2E2B1] font-bold">About</li>
       </Link>
+      </div>
     </>
   );
 
   return (
     <div>
       <div className="navbar bg-[#521C0D] shadow-sm">
-        <div className="navbar-start">
+        <div className="navbar-start md:mx-20">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -57,7 +59,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <Link to=''><a className="btn btn-warning rounded-full bg-">Login</a></Link>
+          <Link to=''><a className="btn btn-warning rounded-full md:mx-20">Login</a></Link>
         </div>
       </div>
     </div>

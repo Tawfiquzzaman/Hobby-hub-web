@@ -30,7 +30,7 @@ const AddHobbyGroup = () => {
       });
   };
   return (
-    <div className="p-24 ">
+    <div className="p-10 md:p-24 ">
       <div className="p-5 bg-[#F7CFD8] rounded-2xl">
         <div className="p-12 text-center space-y-4">
           <h1 className="text-2xl md:text-4xl lg:text-6xl">
@@ -42,7 +42,7 @@ const AddHobbyGroup = () => {
             Fill Up This Form To Add New Hobby Group
           </p>
         </div>
-        <form onSubmit={handleAddHobbyGroup} className="p-4">
+        <form onSubmit={handleAddHobbyGroup} className="md:p-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
               <label className="label">Group Name</label>
