@@ -11,7 +11,7 @@ const Root = () => {
 
                 <div
                     className="absolute inset-0 bg-cover bg-center opacity-20"
-                    style={{ backgroundImage: "url('background.jpeg')" }}
+                    // style={{ backgroundImage: "url('background.jpeg')" }}
                 ></div>
 
 

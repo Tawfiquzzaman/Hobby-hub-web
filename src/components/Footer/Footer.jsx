@@ -7,7 +7,7 @@ const Footer = () => {
             <footer className="footer sm:footer-horizontal bg-[#521C0D] text-neutral-content p-10">
   <aside className='flex gap-10'>
     <img className='w-20' src="hobby.png" alt="" />
-    <Link to='/'><a className="btn btn-ghost text-xl text-white">HobbyHub</a></Link>
+    <Link to='/'><p className="btn btn-ghost text-xl text-white">HobbyHub</p></Link>
   </aside>
   <nav>
     <div className='flex flex-col'>

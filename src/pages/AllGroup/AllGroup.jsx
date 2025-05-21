@@ -1,24 +1,31 @@
-import React from 'react';
+import React from "react";
+import { useLoaderData } from "react-router";
+import SingleGroup from "../SingleGroup/SingleGroup";
 
 const AllGroup = () => {
-    return (
-        <div className='p-20'>
-            <div className="card lg:card-side bg-base-100 shadow-sm">
-                <figure>
-                    <img
-                        src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"
-                        alt="Album" />
-                </figure>
-                <div className="card-body">
-                    <h2 className="card-title">New album is released!</h2>
-                    <p>Click the button to listen on Spotiwhy app.</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Details</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+  const allGroups = useLoaderData();
+  console.log(allGroups);
+
+  return (
+    <div>
+      <div className="p-12 text-center space-y-4">
+        <h1 className="text-2xl md:text-4xl lg:text-6xl">
+          <span className="text-[#FF9B45] font-bold">All</span>{" "}
+          <span className="text-[#521C0D]">Hobby</span>{" "}
+          <span className="text-[#FF9B45] font-bold">Groups</span>
+        </h1>
+        <p className="text-base md:text-2xl">
+          Fill Up This Form To Add New Hobby Group
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {allGroups.map((group) => (
+          <SingleGroup key={group._id} group={group}></SingleGroup>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default AllGroup;

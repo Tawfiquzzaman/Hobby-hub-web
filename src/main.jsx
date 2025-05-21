@@ -12,6 +12,7 @@ import ErrorPage from './pages/Error/ErrorPage.jsx';
 import Home from './pages/Home/Home.jsx';
 import AddHobbyGroup from './pages/AddHobbyGroup/AddHobbyGroup.jsx';
 import AllGroup from './pages/AllGroup/AllGroup.jsx';
+import GroupDetails from './pages/GroupDetails/GroupDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -33,10 +34,18 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
       },
       {
+        path: 'groups/:id',
+        loader: ({ params }) => fetch(`http://localhost:3000/createGroups/${params.id}`),
+        Component: GroupDetails,
+
+      },
+      {
         path: 'allHobbyGroup',
+        loader: () => fetch('http://localhost:3000/createGroups'),
         Component: AllGroup,
         errorElement: <ErrorPage></ErrorPage>,
-      }
+      },
+      
     ]
 
   },
