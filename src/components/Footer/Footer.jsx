@@ -1,16 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Footer = () => {
     return (
         <div>
-            <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
+            <footer className="footer sm:footer-horizontal bg-[#521C0D] text-neutral-content p-10">
   <aside className='flex gap-10'>
     <img className='w-20' src="hobby.png" alt="" />
-    <p>
-      Hobby Hub
-      <br />
-      Providing reliable tech since 1992
-    </p>
+    <Link to='/'><a className="btn btn-ghost text-xl text-white">HobbyHub</a></Link>
   </aside>
   <nav>
     <div className='flex flex-col'>
