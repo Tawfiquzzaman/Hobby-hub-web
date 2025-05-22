@@ -11,11 +11,16 @@ const Register = () => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
+    const {email, password, ...restFormData} = Object.fromEntries(formData.entries());
 
-    const { email, password, ...userProfile } = Object.fromEntries(
-      formData.entries()
-    );
-    console.log(email, password, userProfile);
+    // const { email, password, ...rest } = Object.fromEntries(
+    //   formData.entries()
+    // );
+    // const userProfile = {
+    //     email,
+    //     ...rest,
+    // }
+    // console.log(email, password, userProfile);
 
     // const name = formData.get('name');
     // const photo = formData.get('photo');
@@ -24,6 +29,15 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+
+        const userProfile = {
+            email,
+            ...restFormData,
+            creationTime: result.user?.metadata.creationTime,
+            lastSignInTime: result.user?.metadata.lastSignInTime,
+
+        }
+
 
         //save profile info in the database
         fetch("http://localhost:3000/users", {

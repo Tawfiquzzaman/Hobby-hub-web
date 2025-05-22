@@ -18,6 +18,7 @@ import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import AuthProvider from './context/AuthProvider.jsx';
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         
       }
+      
 
       
     ]
