@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const links = (
@@ -59,7 +59,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <Link to=''><p className="btn btn-warning rounded-full md:mx-20">Login</p></Link>
+          <Link to='/login'><p className="btn btn-warning rounded-full md:mx-20">Login</p></Link>
         </div>
       </div>
     </div>

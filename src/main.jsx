@@ -6,13 +6,17 @@ import App from './App.jsx'
 import {
   createBrowserRouter,
   RouterProvider,
-} from "react-router";
+} from "react-router-dom";
 import Root from './pages/Root/Root.jsx';
 import ErrorPage from './pages/Error/ErrorPage.jsx';
 import Home from './pages/Home/Home.jsx';
 import AddHobbyGroup from './pages/AddHobbyGroup/AddHobbyGroup.jsx';
 import AllGroup from './pages/AllGroup/AllGroup.jsx';
 import GroupDetails from './pages/GroupDetails/GroupDetails.jsx';
+import AuthLayout from './Layouts/AuthLayout.jsx';
+import Login from './pages/Login/Login.jsx';
+import Register from './pages/Register/Register.jsx';
+import AuthProvider from './context/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,14 +49,47 @@ const router = createBrowserRouter([
         Component: AllGroup,
         errorElement: <ErrorPage></ErrorPage>,
       },
+      {
+        
+        path: 'login',
+        Component: Login,
+        errorElement: <ErrorPage></ErrorPage>,
+     
+      },
+      {
+        path:'register',
+        Component: Register,
+        errorElement: <ErrorPage></ErrorPage>,
+        
+      }
+
       
     ]
 
   },
+  // {
+  //           path: '/auth',
+  //           element: <AuthLayout></AuthLayout>,
+  //           children: [
+  //               {
+  //                   path: 'login',
+  //                   element: <Login></Login>,
+
+  //               },
+  //               {
+  //                   // path: 'register',
+  //                   // element: <Register></Register>,
+
+  //               }
+  //           ]
+
+  //       },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
