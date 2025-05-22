@@ -19,7 +19,7 @@ const Login = () => {
           email,
           lastSignInTime: result.user?.metadata?.lastSignInTime,
         };
-        return fetch("http://localhost:3000/users", {
+        return fetch("https://hobby-hub-server-alpha.vercel.app/users", {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",

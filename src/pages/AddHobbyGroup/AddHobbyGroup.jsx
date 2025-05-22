@@ -10,7 +10,7 @@ const AddHobbyGroup = () => {
     const newGroup = Object.fromEntries(formData.entries());
     console.log(newGroup);
 
-    fetch("http://localhost:3000/createGroups", {
+    fetch("https://hobby-hub-server-alpha.vercel.app/createGroups", {
       method: "POST",
       headers: {
         "content-type": "application/json",
