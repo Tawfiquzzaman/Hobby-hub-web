@@ -40,13 +40,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'groups/:id',
-        loader: ({ params }) => fetch(`https://hobby-hub-server-alpha.vercel.app/createGroups/${params.id}`),
+        loader: ({ params }) => fetch(`http://localhost:3000/createGroups/${params.id}`),
         Component: GroupDetails,
 
       },
       {
         path: 'allHobbyGroup',
-        loader: () => fetch('https://hobby-hub-server-alpha.vercel.app/createGroups'),
+        loader: () => fetch('http://localhost:3000/createGroups'),
         Component: AllGroup,
         errorElement: <ErrorPage></ErrorPage>,
       },

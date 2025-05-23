@@ -1,9 +1,13 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signInUser } = use(AuthContext);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [success, SetSuccess] = useState(false);
+
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -11,15 +15,19 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
+    SetSuccess(false);
+    setErrorMsg('');
+
     //firebase send for sign in
     signInUser(email, password)
       .then((result) => {
+        SetSuccess(true);
         console.log(result.user);
         const signInInfo = {
           email,
           lastSignInTime: result.user?.metadata?.lastSignInTime,
         };
-        return fetch("https://hobby-hub-server-alpha.vercel.app/users", {
+        return fetch("http://localhost:3000/users", {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -31,8 +39,14 @@ const Login = () => {
       .then((data) => {
         console.log("after update patch", data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((error) =>  {
+        console.error("Login Error:", error);
+        setErrorMsg(error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: error.message || "Something went wrong. Please try again.",
+        });
       });
   };
 
@@ -112,6 +126,12 @@ const Login = () => {
                   Login with Google
                 </button>
               </form>
+              {
+                errorMsg && <p className="text-red-500">Please Check Log In Credentials</p>
+              }
+              {
+                success && <p className="text-purple-500">Log in Successful</p>
+              }
             </div>
           </div>
         </div>
