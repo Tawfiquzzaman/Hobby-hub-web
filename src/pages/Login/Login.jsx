@@ -1,5 +1,5 @@
 import React, { use, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 
@@ -9,6 +9,8 @@ const Login = () => {
   const [success, SetSuccess] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
 
   const handleSignIn = (e) => {
@@ -29,6 +31,7 @@ const Login = () => {
           email,
           lastSignInTime: result.user?.metadata?.lastSignInTime,
         };
+        navigate(from, { replace: true });
         return fetch("http://localhost:3000/users", {
           method: "PATCH",
           headers: {
@@ -36,11 +39,12 @@ const Login = () => {
           },
           body: JSON.stringify(signInInfo),
         });
+        
       })
       .then((res) => res.json())
       .then((data) => {
         console.log("after update patch", data);
-        navigate('/');
+        navigate(from, { replace: true });
       })
       .catch((error) =>  {
         console.error("Login Error:", error);

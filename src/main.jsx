@@ -17,31 +17,41 @@ import AuthLayout from './Layouts/AuthLayout.jsx';
 import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import AuthProvider from './context/AuthProvider.jsx';
+import PrivateRoute from './routes/PrivateRoutes.jsx';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: Root,
+    Component: Root, 
     errorElement: <ErrorPage></ErrorPage>,
 
     children: [
       {
         index: true,
         path:'/',
+        loader: () => fetch('http://localhost:3000/createGroups'),
         Component: Home,
         errorElement: <ErrorPage></ErrorPage>,
 
       },
       {
         path: 'addHobbyGroup',
-        Component: AddHobbyGroup,
+        element: (<PrivateRoute>
+          <AddHobbyGroup></AddHobbyGroup>
+        </PrivateRoute>),
         errorElement: <ErrorPage></ErrorPage>,
       },
       {
         path: 'groups/:id',
         loader: ({ params }) => fetch(`http://localhost:3000/createGroups/${params.id}`),
-        Component: GroupDetails,
+        element: (
+          <PrivateRoute>
+            <GroupDetails></GroupDetails>
+          </PrivateRoute>
+        ),
+        errorElement: <ErrorPage></ErrorPage>,
+
 
       },
       {
