@@ -132,6 +132,7 @@ const Register = () => {
                   className="input input-info"
                   placeholder="Photo URL"
                   name="photo"
+                  required
                 />
                 <div>
                   <p>

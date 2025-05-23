@@ -1,17 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
-
   const { user, logout } = useContext(AuthContext);
-  const [showName, setShowName] = useState(false);
   
 
   const handleLogout = async () => {
     try {
       await logout();
-
     } catch (error) {
       console.error("Logout error:", error);
     }
@@ -21,17 +18,19 @@ const Navbar = () => {
     <>
       <div className="sm:flex md:flex gap-10">
         <Link>
-        <li className="text-[#F2E2B1] font-bold" to="/">Home</li>
-      </Link>
-      <Link to='/allHobbyGroup'>
-        <li className="text-[#F2E2B1] font-bold">All Groups</li>
-      </Link>
-      <Link to="/addHobbyGroup">
-        <li className="text-[#F2E2B1] font-bold">Add Hobby Group</li>
-      </Link>
-      <Link>
-        <li className="text-[#F2E2B1] font-bold">About</li>
-      </Link>
+          <li className="text-[#F2E2B1] font-bold" to="/">
+            Home
+          </li>
+        </Link>
+        <Link to="/allHobbyGroup">
+          <li className="text-[#F2E2B1] font-bold">All Groups</li>
+        </Link>
+        <Link to="/addHobbyGroup">
+          <li className="text-[#F2E2B1] font-bold">Add Hobby Group</li>
+        </Link>
+        <Link>
+          <li className="text-[#F2E2B1] font-bold">About</li>
+        </Link>
       </div>
     </>
   );
@@ -67,7 +66,9 @@ const Navbar = () => {
           </div>
           <div className="flex">
             <img className="w-10" src="hobby.png" alt="" />
-            <Link to='/'><p className="btn btn-ghost text-xl text-white">HobbyHub</p></Link>
+            <Link to="/">
+              <p className="btn btn-ghost text-xl text-white">HobbyHub</p>
+            </Link>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -76,22 +77,22 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             <>
-              <button onClick={handleLogout} className="btn btn-warning rounded-full">
+              <button
+                onClick={handleLogout}
+                className="btn bg-[#D5451B] text-white rounded-full"
+              >
                 Logout
               </button>
-              <div className="relative ml-4">
+              <div className="relative ml-4 group">
                 <img
                   src={user.photoURL || "default-profile.png"}
                   alt="Profile"
                   className="w-10 h-10 rounded-full cursor-pointer"
-                  onClick={() => setShowName(!showName)}
-                  title="Click to toggle username"
+                  title="Profile Picture"
                 />
-                {showName && (
-                  <div className="absolute right-0 mt-2 p-2 bg-white text-black rounded shadow-md whitespace-nowrap z-10">
-                    {user.displayName || user.email || "No Name"}
-                  </div>
-                )}
+                <div className="absolute right-0 mt-1 mb-2 p-1 bg-[#CA7842] text-white rounded shadow-md whitespace-nowrap z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {user.displayName || user.email || "No Name"}
+                </div>
               </div>
             </>
           ) : (
