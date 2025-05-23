@@ -1,93 +1,84 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom"; 
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth"; 
 
 const Register = () => {
-
   const [success, SetSuccess] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-
-
+  const [errorMsg, setErrorMsg] = useState("");
   const { createUser } = useContext(AuthContext);
-  console.log(createUser);
 
   const handleRegistration = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const {email, password, ...restFormData} = Object.fromEntries(formData.entries());
-
-    // const { email, password, ...rest } = Object.fromEntries(
-    //   formData.entries()
-    // );
-    // const userProfile = {
-    //     email,
-    //     ...rest,
-    // }
-    // console.log(email, password, userProfile);
-
-    // const name = formData.get('name');
-    // const photo = formData.get('photo');
+    const { email, password, name, photo } = Object.fromEntries(
+      formData.entries()
+    );
 
     SetSuccess(false);
-    setErrorMsg('');
+    setErrorMsg("");
 
-    //Password validation
+    // Password validation
     const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
-  const isLengthValid = password.length >= 6;
+    const hasLowerCase = /[a-z]/.test(password);
+    const isLengthValid = password.length >= 6;
 
-  if (!hasUpperCase || !hasLowerCase || !isLengthValid) {
-    let message = "Password must:\n";
-    if (!hasUpperCase) message += "- include at least one uppercase letter\n";
-    if (!hasLowerCase) message += "- include at least one lowercase letter\n";
-    if (!isLengthValid) message += "- be at least 6 characters long";
+    if (!hasUpperCase || !hasLowerCase || !isLengthValid) {
+      let message = "Password must:\n";
+      if (!hasUpperCase) message += "- include at least one uppercase letter\n";
+      if (!hasLowerCase) message += "- include at least one lowercase letter\n";
+      if (!isLengthValid) message += "- be at least 6 characters long";
 
-    Swal.fire({
-      icon: "error",
-      title: "Invalid Password",
-      text: message,
-    });
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Password",
+        text: message,
+      });
+      return;
+    }
 
-    return; // prevent submission
-  }
-
-    //create user
+    // Create user
     createUser(email, password)
       .then((result) => {
-        console.log(result.user);
-        SetSuccess(true);
+        const createdUser = result.user;
 
-        const userProfile = {
+        return updateProfile(createdUser, {
+          displayName: name,
+          photoURL: photo,
+        }).then(() => {
+          SetSuccess(true);
+
+          // Save user to DB
+          const userProfile = {
             email,
-            ...restFormData,
-            creationTime: result.user?.metadata.creationTime,
-            lastSignInTime: result.user?.metadata.lastSignInTime,
+            name,
+            photo,
+            creationTime: createdUser?.metadata?.creationTime,
+            lastSignInTime: createdUser?.metadata?.lastSignInTime,
+          };
 
-        }
-
-
-        //save profile info in the database
-        fetch("http://localhost:3000/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(userProfile),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.insertedId) {
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Your Profile Account has been Created Successfully!!",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-            }
+          return fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(userProfile),
           });
+        });
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Profile Account has been Created Successfully!!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -110,13 +101,14 @@ const Register = () => {
           </div>
           <div className="card bg-[#FFC6C6] w-full max-w-sm shrink-0 shadow-2xl mt-10">
             <div className="card-body">
-              <form onSubmit={handleRegistration} className="fieldset">
+              <form onSubmit={handleRegistration}>
                 <label className="label">Name</label>
                 <input
                   type="text"
                   className="input input-info"
                   placeholder="Full Name"
                   name="name"
+                  required
                 />
                 <label className="label">Email</label>
                 <input
@@ -124,6 +116,7 @@ const Register = () => {
                   className="input input-info"
                   placeholder="Email"
                   name="email"
+                  required
                 />
                 <label className="label">Password</label>
                 <input
@@ -131,6 +124,7 @@ const Register = () => {
                   className="input input-info"
                   placeholder="Password"
                   name="password"
+                  required
                 />
                 <label className="label">Photo URL</label>
                 <input
@@ -149,12 +143,10 @@ const Register = () => {
                 </div>
                 <button className="btn btn-neutral mt-4">Register</button>
               </form>
-              {
-                errorMsg && <p className="text-red-500">{errorMsg}</p>
-              }
-              {
-                success && <p className="text-purple-500">User Has Created Successfully</p>
-              }
+              {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+              {success && (
+                <p className="text-purple-500">User Created Successfully</p>
+              )}
             </div>
           </div>
         </div>

@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
+
+  const { user, logout } = useContext(AuthContext);
+  const [showName, setShowName] = useState(false);
+  
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
   const links = (
     <>
       <div className="sm:flex md:flex gap-10">
@@ -59,7 +74,31 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <Link to='/login'><p className="btn btn-warning rounded-full md:mx-20">Login</p></Link>
+          {user ? (
+            <>
+              <button onClick={handleLogout} className="btn btn-warning rounded-full">
+                Logout
+              </button>
+              <div className="relative ml-4">
+                <img
+                  src={user.photoURL || "default-profile.png"}
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full cursor-pointer"
+                  onClick={() => setShowName(!showName)}
+                  title="Click to toggle username"
+                />
+                {showName && (
+                  <div className="absolute right-0 mt-2 p-2 bg-white text-black rounded shadow-md whitespace-nowrap z-10">
+                    {user.displayName || user.email || "No Name"}
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <Link to="/login">
+              <p className="btn btn-warning rounded-full">Login</p>
+            </Link>
+          )}
         </div>
       </div>
     </div>

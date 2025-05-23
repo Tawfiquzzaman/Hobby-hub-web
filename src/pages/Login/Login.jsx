@@ -1,5 +1,5 @@
 import React, { use, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 
@@ -7,6 +7,8 @@ const Login = () => {
   const { signInUser } = use(AuthContext);
   const [errorMsg, setErrorMsg] = useState('');
   const [success, SetSuccess] = useState(false);
+
+  const navigate = useNavigate();
 
 
   const handleSignIn = (e) => {
@@ -38,6 +40,7 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("after update patch", data);
+        navigate('/');
       })
       .catch((error) =>  {
         console.error("Login Error:", error);
