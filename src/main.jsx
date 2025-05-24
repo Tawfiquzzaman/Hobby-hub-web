@@ -18,6 +18,7 @@ import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import AuthProvider from './context/AuthProvider.jsx';
 import PrivateRoute from './routes/PrivateRoutes.jsx';
+import MyGroups from './pages/MyGroups/MyGroups.jsx';
 
 
 const router = createBrowserRouter([
@@ -70,6 +71,12 @@ const router = createBrowserRouter([
       {
         path:'register',
         Component: Register,
+        errorElement: <ErrorPage></ErrorPage>,
+        
+      },
+      {
+        path: 'myGroups',
+        Component: MyGroups,
         errorElement: <ErrorPage></ErrorPage>,
         
       }

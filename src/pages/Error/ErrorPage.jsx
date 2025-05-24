@@ -4,7 +4,7 @@ import Navbar from '../../components/Header/Navbar';
 const ErrorPage = () => {
     return (
         <div>
-            <Navbar></Navbar>
+            {/* <Navbar></Navbar> */}
             <img className='p-20' src='errorPage.jpg' alt="" />
         </div>
     );

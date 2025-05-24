@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthContext";
 
 const AddHobbyGroup = () => {
+
+  const {user} = useContext(AuthContext);
+
   const handleAddHobbyGroup = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     console.log(formData.entries());
     const newGroup = Object.fromEntries(formData.entries());
-    console.log(newGroup);
+    
+     newGroup.username = user?.displayName || "Unknown";
+     newGroup.useremail = user?.email || "xyz@example.com";
+     newGroup.createdAt = new Date().toISOString();
 
     fetch("http://localhost:3000/createGroups", {
       method: "POST",

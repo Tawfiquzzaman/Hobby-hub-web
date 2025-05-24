@@ -28,6 +28,9 @@ const Navbar = () => {
         <Link to="/addHobbyGroup">
           <li className="text-[#F2E2B1] font-bold">Add Hobby Group</li>
         </Link>
+        <Link to="/myGroups">
+          <li className="text-[#F2E2B1] font-bold">My Groups</li>
+        </Link>
         <Link>
           <li className="text-[#F2E2B1] font-bold">About</li>
         </Link>
