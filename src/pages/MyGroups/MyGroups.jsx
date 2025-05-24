@@ -8,7 +8,7 @@ const MyGroups = () => {
 
    useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/createGroups?useremail=${user.useremail}`)
+      fetch(`https://hobby-hub-server-alpha.vercel.app/createGroups?useremail=${user.useremail}`)
         .then(res => res.json())
         .then(data => setMyGroups(data))
         .catch(err => console.error('Error fetching user groups:', err));

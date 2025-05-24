@@ -20,7 +20,7 @@ const SingleGroup = ({ group }) => {
         
       if (result.isConfirmed) {
 
-        fetch(`http://localhost:3000/createGroups/${_id}`,{
+        fetch(`https://hobby-hub-server-alpha.vercel.app/createGroups/${_id}`,{
             method: 'DELETE'
         })
         .then(res => res.json())
@@ -55,6 +55,7 @@ const SingleGroup = ({ group }) => {
         >
           Delete
         </button>
+        <Link to={`/updateGroup/${_id}`}><button className="btn btn-active btn-info">Update</button></Link>
         <div className="card-actions justify-end">
           <Link to={`/groups/${_id}`}>
             <button className="btn bg-[#3A0519] text-white rounded-full">

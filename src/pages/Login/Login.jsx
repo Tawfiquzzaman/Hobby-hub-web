@@ -32,7 +32,7 @@ const Login = () => {
           lastSignInTime: result.user?.metadata?.lastSignInTime,
         };
         navigate(from, { replace: true });
-        return fetch("http://localhost:3000/users", {
+        return fetch("https://hobby-hub-server-alpha.vercel.app/users", {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",

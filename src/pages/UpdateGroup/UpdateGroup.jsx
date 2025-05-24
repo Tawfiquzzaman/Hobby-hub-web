@@ -1,55 +1,59 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../context/AuthContext";
 
-const AddHobbyGroup = () => {
-
-  const {user} = useContext(AuthContext);
-
-  const handleAddHobbyGroup = (e) => {
+const UpdateGroup = () => {
+  const {
+    _id,
+    name,
+   
+    description,
+    meeting,
+    max,
+    date,
+    username,
+    useremail,
+    photo,
+  } = useLoaderData();
+  const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    console.log(formData.entries());
-    const newGroup = Object.fromEntries(formData.entries());
-    
-     newGroup.username = user?.displayName || "Unknown";
-     newGroup.useremail = user?.email || "xyz@example.com";
-     newGroup.createdAt = new Date().toISOString();
+    const updateGroup = Object.fromEntries(formData.entries());
 
-    fetch("https://hobby-hub-server-alpha.vercel.app/createGroups", {
-      method: "POST",
+    fetch(`https://hobby-hub-server-alpha.vercel.app/createGroups/${_id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newGroup),
+      body: JSON.stringify(updateGroup),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
-          console.log("Added Successfully");
+        if (data.modifiedCount) {
           Swal.fire({
-            title: "Group Created Successfully",
+            position: "top-end",
             icon: "success",
-            draggable: true,
+            title: "Group Updated Successfully",
+            showConfirmButton: false,
+            timer: 1500,
           });
         }
       });
   };
+
   return (
     <div className="p-10 md:p-24 ">
       <div className="p-5 bg-[#F7CFD8] rounded-2xl">
         <div className="p-12 text-center space-y-4">
           <h1 className="text-2xl md:text-4xl lg:text-6xl">
-            <span className="text-[#FF9B45] font-bold">Create</span>{" "}
-            <span className="text-[#521C0D]">New</span>{" "}
-            <span className="text-[#FF9B45] font-bold">Hobby</span>
+            <span className="text-[#FF9B45] font-bold">Update</span>{" "}
+            <span className="text-[#521C0D]">Hobby</span>{" "}
+            <span className="text-[#FF9B45] font-bold">Group</span>
           </h1>
-          <p className="text-base md:text-2xl">
-            Fill Up This Form To Add New Hobby Group
-          </p>
+          <p className="text-base md:text-2xl">Update Your Group Details</p>
         </div>
-        <form onSubmit={handleAddHobbyGroup} className="md:p-20">
+        <form onSubmit={handleUpdate} className="md:p-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
               <label className="label">Group Name</label>
@@ -58,6 +62,7 @@ const AddHobbyGroup = () => {
                 name="name"
                 className="input w-full"
                 placeholder="Group Name"
+                defaultValue={name}
               />
             </fieldset>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -83,6 +88,7 @@ const AddHobbyGroup = () => {
                 name="description"
                 className="input w-full"
                 placeholder="Group Description"
+                defaultValue={description}
               />
             </fieldset>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -92,6 +98,7 @@ const AddHobbyGroup = () => {
                 name="meeting"
                 className="input w-full"
                 placeholder="Meeting Location"
+                defaultValue={meeting}
               />
             </fieldset>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -101,6 +108,7 @@ const AddHobbyGroup = () => {
                 name="max"
                 className="input w-full"
                 placeholder="Max Members"
+                defaultValue={max}
               />
             </fieldset>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -110,6 +118,7 @@ const AddHobbyGroup = () => {
                 name="date"
                 className="input w-full"
                 placeholder="Start-Date"
+                defaultValue={date}
               />
             </fieldset>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -119,6 +128,7 @@ const AddHobbyGroup = () => {
                 name="username"
                 className="input w-full"
                 placeholder="User Name(Display Name)"
+                defaultValue={username}
               />
             </fieldset>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -128,6 +138,7 @@ const AddHobbyGroup = () => {
                 name="useremail"
                 className="input w-full"
                 placeholder="User Email"
+                defaultValue={useremail}
               />
             </fieldset>
           </div>
@@ -138,13 +149,14 @@ const AddHobbyGroup = () => {
               name="photo"
               className="input w-full"
               placeholder="Image URL"
+              defaultValue={photo}
             />
           </fieldset>
 
           <input
             className="btn w-full rounded-full bg-[#FF9B45]"
             type="submit"
-            value="Create Group"
+            value="Update"
           />
         </form>
       </div>
@@ -152,4 +164,4 @@ const AddHobbyGroup = () => {
   );
 };
 
-export default AddHobbyGroup;
+export default UpdateGroup;

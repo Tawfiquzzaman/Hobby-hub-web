@@ -9,7 +9,7 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/createGroups?sort=desc")
+    fetch("https://hobby-hub-server-alpha.vercel.app/createGroups?sort=desc")
       .then((res) => res.json())
       .then((data) => {
         // Enforce 6-item limit in frontend
@@ -25,10 +25,10 @@ const Home = () => {
   return (
     <div>
       <div className="carousel h-[700px] py-5">
-        <h1 className="absolute top-30 left-1/2 z-10 -translate-x-1/2 text-white text-4xl font-bold drop-shadow-lg">
+        <h1 className="absolute top-30 left-1/2 z-10 -translate-x-1/2 text-white text-2xl text-center md:text-4xl font-bold drop-shadow-lg">
           Welcome to Hobby Hub
         </h1>
-        <p className="absolute top-45 left-1/2 z-10 -translate-x-1/2 text-[#FE5D26] text-xl font-bold drop-shadow-lg">
+        <p className="absolute top-45 left-1/2 z-10 -translate-x-1/2 text-[#FE5D26] text-lg text-center md:text-xl font-bold drop-shadow-lg">
           Explore The World of Hobbies
         </p>
         <div id="slide1" className="carousel-item relative w-full">

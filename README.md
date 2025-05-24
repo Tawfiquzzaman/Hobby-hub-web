@@ -13,3 +13,10 @@ If you are developing a production application, we recommend using TypeScript wi
 
 
 
+1. This website is based on hobbies
+2. This Website has some beautiful groups
+3. User can add groups here
+4. user can create account and make their own groups
+5. User can also update their groups.
+
+Live url: nimble-parfait-4eb680.netlify.app
