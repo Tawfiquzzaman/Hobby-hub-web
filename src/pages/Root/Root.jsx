@@ -7,9 +7,21 @@ const Root = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            <div className="relative w-full mx-auto bg-[#F3F3E0]">
+
+                <div
+                    className="absolute inset-0 bg-cover bg-center opacity-20"
+                    // style={{ backgroundImage: "url('background.jpeg')" }}
+                ></div>
+
+
+                <div className="relative z-10">
+                    <Outlet />
+                </div>
+            </div>
+
             <Footer></Footer>
-            
+
         </div>
     );
 };
