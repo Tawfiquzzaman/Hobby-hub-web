@@ -5,8 +5,10 @@ import Footer from '../../components/Footer/Footer';
 
 const Root = () => {
     return (
-        <div>
-            <Navbar></Navbar>
+        <div className='md:mx-10'>
+            <div className=''>
+                <Navbar></Navbar>
+            </div>
             <div className="relative w-full mx-auto bg-[#F3F3E0]">
 
                 <div
