@@ -59,7 +59,7 @@ const Register = () => {
             lastSignInTime: createdUser?.metadata?.lastSignInTime,
           };
 
-          return fetch("https://hobby-hub-server-alpha.vercel.app/users", {
+          return fetch("http://localhost:3000/users", {
             method: "POST",
             headers: {
               "content-type": "application/json",
