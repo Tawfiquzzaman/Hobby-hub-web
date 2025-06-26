@@ -39,7 +39,7 @@ const SingleGroup = ({ group }) => {
 
   return (
     <div className="card lg:card-side bg-[#F79B72] border-2 border-[#3A0519] shadow-md">
-      <figure>
+      <figure className="w-48 lg:w-60 h-40 lg:h-48 overflow-hidden">
         <img
           src={photo}
           alt={name}
@@ -58,7 +58,7 @@ const SingleGroup = ({ group }) => {
         <Link to={`/updateGroup/${_id}`}><button className="btn btn-active btn-info">Update</button></Link>
         <div className="card-actions justify-end">
           <Link to={`/groups/${_id}`}>
-            <button className="btn bg-[#3A0519] text-white rounded-full">
+            <button className="btn bg-[#3A0519] text-white rounded-full w-30 mr-10 md:mr-10">
               See More
             </button>
           </Link>
