@@ -9,12 +9,12 @@ const Dashboard = () => {
 
   useEffect(() => {
     // Fetch all user
-    fetch("http://localhost:3000/users")
+    fetch("https://hobby-hub-server-alpha.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setAllUsers(data));
 
     // Fetch all groups
-    fetch("http://localhost:3000/createGroups")
+    fetch("https://hobby-hub-server-alpha.vercel.app/createGroups")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

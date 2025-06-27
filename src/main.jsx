@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       {
         index: true,
         path: "/",
-        loader: () => fetch("http://localhost:3000/createGroups"),
+        loader: () => fetch("https://hobby-hub-server-alpha.vercel.app/createGroups"),
         Component: Home,
         errorElement: <ErrorPage></ErrorPage>,
       },
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       {
         path: "groups/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/createGroups/${params.id}`),
+          fetch(`https://hobby-hub-server-alpha.vercel.app/createGroups/${params.id}`),
         element: (
           <PrivateRoute>
             <GroupDetails></GroupDetails>
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: "allHobbyGroup",
-        loader: () => fetch("http://localhost:3000/createGroups"),
+        loader: () => fetch("https://hobby-hub-server-alpha.vercel.app/createGroups"),
         Component: AllGroup,
         errorElement: <ErrorPage></ErrorPage>,
       },
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
       {
         path: "updateGroup/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/createGroups/${params.id}`),
+          fetch(`https://hobby-hub-server-alpha.vercel.app/createGroups/${params.id}`),
         element: (
           <PrivateRoute>
             <UpdateGroup />
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        loader: () => fetch("http://localhost:3000/createGroups"),
+        loader: () => fetch("https://hobby-hub-server-alpha.vercel.app/createGroups"),
         element: <Dashboard></Dashboard>,
         errorElement: <ErrorPage></ErrorPage>
       }

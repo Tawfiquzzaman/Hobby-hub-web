@@ -17,7 +17,7 @@ const AddHobbyGroup = () => {
      newGroup.useremail = user?.email || "xyz@example.com";
      newGroup.createdAt = new Date().toISOString();
 
-    fetch("http://localhost:3000/createGroups", {
+    fetch("https://hobby-hub-server-alpha.vercel.app/createGroups", {
       method: "POST",
       headers: {
         "content-type": "application/json",

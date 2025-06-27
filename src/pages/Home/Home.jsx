@@ -8,7 +8,7 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/createGroups?sort=desc")
+    fetch("https://hobby-hub-server-alpha.vercel.app/createGroups?sort=desc")
       .then((res) => res.json())
       .then((data) => {
         // Enforce 6-item limit in frontend

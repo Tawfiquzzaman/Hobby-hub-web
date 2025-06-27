@@ -20,7 +20,7 @@ const SingleGroup = ({ group }) => {
         
       if (result.isConfirmed) {
 
-        fetch(`http://localhost:3000/createGroups/${_id}`,{
+        fetch(`https://hobby-hub-server-alpha.vercel.app/createGroups/${_id}`,{
             method: 'DELETE'
         })
         .then(res => res.json())
