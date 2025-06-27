@@ -17,6 +17,7 @@ import AuthProvider from "./context/AuthProvider.jsx";
 import PrivateRoute from "./routes/PrivateRoutes.jsx";
 import MyGroups from "./pages/MyGroups/MyGroups.jsx";
 import UpdateGroup from "./pages/UpdateGroup/UpdateGroup.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -88,6 +89,12 @@ const router = createBrowserRouter([
         ),
         errorElement: <ErrorPage></ErrorPage>
       },
+      {
+        path: "dashboard",
+        loader: () => fetch("http://localhost:3000/createGroups"),
+        element: <Dashboard></Dashboard>,
+        errorElement: <ErrorPage></ErrorPage>
+      }
     ],
   },
   // {
