@@ -1,16 +1,53 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signInUser } = use(AuthContext);
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const [errorMsg, setErrorMsg] = useState('');
   const [success, SetSuccess] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  //Google Log in
+  const handleGoogleLogin = () => {
+  signInWithGoogle()
+    .then((result) => {
+      const user = result.user;
+      console.log("Google Login:", user);
+
+      const userInfo = {
+        email: user.email,
+        name: user.displayName,
+        photoURL: user.photoURL,
+        lastSignInTime: user.metadata?.lastSignInTime,
+      };
+
+      return fetch("https://hobby-hub-server-alpha.vercel.app/users", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+      }).then((res) => res.json())
+        .then((data) => {
+          console.log("User updated:", data);
+          navigate(from, { replace: true });
+        });
+    })
+    .catch((error) => {
+      console.error("Google Login Error:", error);
+      setErrorMsg(error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Google Login Failed',
+        text: error.message || "Something went wrong. Please try again.",
+      });
+    });
+};
 
 
   const handleSignIn = (e) => {
@@ -102,7 +139,7 @@ const Login = () => {
                   <h1 className="text-center">Others Login</h1>
                 </div>
                 {/* Google */}
-                <button className="btn bg-white text-black border-[#e5e5e5]">
+                <button onClick={handleGoogleLogin} type="button" className="btn bg-white text-black border-[#e5e5e5]">
                   <svg
                     aria-label="Google logo"
                     width="16"
