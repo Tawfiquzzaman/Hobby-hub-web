@@ -27,6 +27,9 @@ Hobby-hub is a full-stack web application built with ReactJS and MongoDB, where 
 
 Home Screen:
 ![image](https://github.com/user-attachments/assets/71e1cdc4-a697-4410-b63d-db3cc33fe033)
+Dashboard:
+![image](https://github.com/user-attachments/assets/9ed3ecf2-8530-49d2-8904-7ffc74aa2dbc)
+
 
 ## 🛠️ Technology Stack
 
